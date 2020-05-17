@@ -9,6 +9,7 @@ var JaniceUtils = (function() {
   var MARKETS = {
     'jita': 2,
     'r1o-gn': 3,
+    'perimeter': 3,
   };
   
   function fetch_(url, options, cacheBuster) {
@@ -161,7 +162,7 @@ var JaniceUtils = (function() {
  *
  * @param {range} items Items to be appraised. Either type name or type id can be used.
  * @param {string} spec Column specification. Example: "itemType.eid|itemType.name|buyPriceMax|sellPriceMin"
- * @param {string} market Market, options: "jita" "r1o-gn".
+ * @param {string} market Market, options: "jita", "perimeter", "r1o-gn".
  * @param {string} cacheBuster String to break through cache.
  * @customfunction
  */
