@@ -9,7 +9,7 @@ var JaniceUtils = (function() {
   var MARKETS = {
     'jita': 2,
     'r1o-gn': 3,
-    'perimeter': 3,
+    'perimeter': 4,
   };
   
   function fetch_(url, options, cacheBuster) {
