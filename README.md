@@ -6,8 +6,9 @@ This repository serves only as issue tracker for https://janice.e-351.com
 
 # API
 
-Both require an api key - get one by sending me PM. Reason for having own api key is so that I can contact/block people with excessive traffic. If you use api key not bound to your name (like the one above) you might find yourself blocked at some point without warning.
+APIs require an api key, you can get one by sending me PM (kukki#3914). Reason for having own api key is so that I can contact/block people with excessive traffic. If you use api key not bound to your name (like the one below) you might find yourself blocked at some point without warning.
 
+Swagger UI: https://janice.e-351.com/api/rest/docs/index.html
 Sample api key: `G9KwKq3465588VPd6747t95Zh94q3W2E`
 
 # Google sheets script
