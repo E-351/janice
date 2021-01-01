@@ -162,11 +162,6 @@ var JaniceUtils = (function() {
   };
 })();
 
-function JANICE_PRICER_TEST() {
-  var kebap = JANICE_PRICER([['Crystalline Carbonide', 'Fermionic Condensates', 'Fernite Carbide', 16227, 'Caracal', 34]], 'itemType.eid|itemType.name|buyPriceMax|sellPriceMin', 'NPC');
-  var k0 = kebap[0];
-}
-
 /**
  * Return pricing information for given single dimensional item range.
  *
