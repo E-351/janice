@@ -131,7 +131,9 @@ var JaniceUtils = (function() {
     }
     
     this.output = [];
-    this.output.length = this.input.length;
+    for (var i = 0; i < this.input.length; i++) {
+      this.output.push([]);
+    }
   }
   
   Range.prototype.getResult = function () {  
@@ -160,6 +162,11 @@ var JaniceUtils = (function() {
   };
 })();
 
+function JANICE_PRICER_TEST() {
+  var kebap = JANICE_PRICER([['Crystalline Carbonide', 'Fermionic Condensates', 'Fernite Carbide', 16227, 'Caracal', 34]], 'itemType.eid|itemType.name|buyPriceMax|sellPriceMin', 'NPC');
+  var k0 = kebap[0];
+}
+
 /**
  * Return pricing information for given single dimensional item range.
  *
@@ -185,7 +192,7 @@ function JANICE_PRICER(items, spec, market, cacheBuster) {
   if (typeof market === 'string') {
     market = JaniceUtils.MARKETS[market.toLowerCase()]
     if (!market) {
-      market = JaniceUtils.MARKETS['jita'];
+      throw new Error('invalid market');
     }
   } else {
     market = JaniceUtils.MARKETS['jita'];
