@@ -10,6 +10,9 @@ var JaniceUtils = (function() {
     'jita': 2,
     'r1o-gn': 3,
     'perimeter': 4,
+    'jitameter': 5,
+    'npc': 6,
+    't5zi-s': 113
   };
   
   function fetch_(url, options, cacheBuster) {
