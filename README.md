@@ -11,7 +11,15 @@ APIs require an api key, you can get one by sending me PM (kukki#3914). Reason f
 Swagger UI: https://janice.e-351.com/api/rest/docs/index.html <br />
 Sample api key: `G9KwKq3465588VPd6747t95Zh94q3W2E`
 
-# Google sheets script
+# Google sheets script v2
+
+1) Copy script in `janice-v2.gs`
+2) Paste it into your sheet => tools => script editor
+3) Use `JANICE_PRICER` function in your sheet
+
+Sample sheet: https://docs.google.com/spreadsheets/d/1TPRhmsw77-vIO7QD-XlvCu9w0xzyk73iuGtto0SrQZE/edit?usp=sharing
+
+# Google sheets script (v1 - legacy)
 
 1) Copy script in `janice.gs`
 2) Paste it into your sheet => tools => script editor
