@@ -42,7 +42,7 @@ var JaniceUtils = (function() {
   }
   
   function transpose_(a) {
-    return Object.keys(a[0]).map(function (c) { return a.map(function (r) { return r[c]; }); });
+    return Object.keys(new Array(a[0].length).fill()).map(function (c) { return a.map(function (r) { return r[c]; }); });
   }
   
   function find_(where, what, by) {
@@ -166,9 +166,9 @@ var JaniceUtils = (function() {
  * Return pricing information for given single dimensional item range.
  *
  * @param {range} items Items to be appraised. Either type name or type id can be used.
- * @param {string} spec Column specification. Example: "itemType.eid|itemType.name|immediatePrices.buyPrice|immediatePrices.sellPrice"
- * @param {string} market Market, options: "jita", "perimeter", "r1o-gn".
- * @param {string} cacheBuster String to break through cache.
+ * @param {string?} spec Column specification. Example: "itemType.eid|itemType.name|immediatePrices.buyPrice|immediatePrices.sellPrice"
+ * @param {string?} market Market, options: "jita", "perimeter", "r1o-gn".
+ * @param {string?} cacheBuster String to break through cache.
  * @customfunction
  */
 function JANICE_PRICER(items, spec, market, cacheBuster) {
@@ -197,7 +197,7 @@ function JANICE_PRICER(items, spec, market, cacheBuster) {
     cacheBuster = '-';
   }
   
-  var url = JaniceUtils.API_URL + '/pricer?market=' + market + '&_=' + cacheBuster;
+  var url = JaniceUtils.API_URL + '/pricer?market=' + encodeURIComponent(market) + '&_=' + encodeURIComponent(cacheBuster);
   
   var data = JaniceUtils.fetchJson(url, { 
     method: 'post',
@@ -216,6 +216,61 @@ function JANICE_PRICER(items, spec, market, cacheBuster) {
     
     var typeInfo = JaniceUtils.find(data, input, ['itemType.eid', 'itemType.name']);
     if (!typeInfo) {
+      continue;
+    }
+    
+    range.output[i] = JaniceUtils.formatRow(typeInfo, spec);
+  }
+
+  return range.getResult();
+}
+
+/**
+ * Obtain base job cost for specified items.
+ *
+ * @param {range} items Items to be evaluated. Either type name or type id can be used.
+ * @param {string?} activity Activity, options: "manufacturing", "researchingtimeefficiency", "researchingmaterialefficiency", "copying", "invention", "reactions"
+ * @param {string?} spec Column specification. Example: "itemType.eid|itemType.name|baseJobCost"
+ * @param {string?} cacheBuster String to break through cache.
+ * @customfunction
+ */
+function JANICE_BASE_JOB_COST(items, activity, spec, cacheBuster) {
+  var range = new JaniceUtils.Range(items);
+
+  if (range.input.length <= 0) {
+    return [null];
+  }
+
+  if (typeof spec === 'string' && spec.length > 0) {
+    spec = spec.split('|');
+  } else {
+    spec = ['baseJobCost'];
+  }
+  
+  if (!cacheBuster) {
+    cacheBuster = '-';
+  }
+  
+  var url = JaniceUtils.API_URL + '/industry/base-job-cost?activity=' + encodeURIComponent(activity) + '&_=' + encodeURIComponent(cacheBuster);
+  
+  var data = JaniceUtils.fetchJson(url, { 
+    method: 'post',
+    contentType: "text/plain",
+    headers: {
+      'X-ApiKey': JANICE_API_KEY,
+    },
+    payload: range.input.join('\n'),
+  });
+
+  for (var i = 0; i < range.input.length; i++) {
+    var input = range.input[i];
+    if (typeof input !== 'string' && typeof input !== 'number') {
+      continue;
+    }
+    
+    var typeInfo = JaniceUtils.find(data, input, ['itemType.eid', 'itemType.name']);
+    if (!typeInfo) {
+      range.output[i] = new Array(spec.length);
       continue;
     }
     
