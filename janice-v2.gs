@@ -44,17 +44,29 @@ var JaniceUtils = (function() {
   function transpose_(a) {
     return Object.keys(new Array(a[0].length).fill()).map(function (c) { return a.map(function (r) { return r[c]; }); });
   }
+
+  function to_string_(value) {
+    if (typeof value === 'string') {
+      return value;
+    } else if (value === undefined || value === null) {
+      return '';
+    } else {
+      return value.toString();
+    }
+  }
   
   function find_(where, what, by) {
     if (!Array.isArray(where)) {
       return null;
     }
-    
+
+    what = to_string_(what).toUpperCase();
+
     for (var i = 0; i < where.length; i++) {
       for (var ki = 0; ki < by.length; ki++) {
         var value = navigate_(where[i], by[ki]);
         
-        if (value === what) {
+        if (to_string_(value).toUpperCase() === what) {
           return where[i];
         }
       }
