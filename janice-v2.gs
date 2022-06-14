@@ -11,7 +11,9 @@ var JaniceUtils = (function() {
     'r1o-gn': 3,
     'perimeter': 4,
     'jitameter': 5,
-    'npc': 6
+    'npc': 6,
+    'mj-5f9': 114,
+    'amarr': 115
   };
   
   function fetch_(url, options, cacheBuster) {
