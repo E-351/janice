@@ -114,7 +114,7 @@ var JaniceUtils = (function() {
           for (var i = 0; i < row.length; i++) {
             var value = row[i];
             if ((typeof value === 'string' && value.length > 0) || typeof value === 'number') {
-              this.input[i] = value;
+              this.input[i] = value.toString().trim();
             }
           }
         }
@@ -126,7 +126,7 @@ var JaniceUtils = (function() {
           if (Array.isArray(row) && row.length === 1) {
             var value = row[0];
             if ((typeof value === 'string' && value.length > 0) || typeof value === 'number') {
-              this.input[i] = value;
+              this.input[i] = value.toString().trim();
             }
           } else {
             this.mode = 'error';
@@ -136,7 +136,7 @@ var JaniceUtils = (function() {
       }
     } else if ((typeof items === 'string' && items.length > 0) || typeof items === 'number') {
       this.mode = 'single';
-      this.input[0] = items.toString();
+      this.input[0] = items.toString().trim();
     } 
     
     if (this.mode === 'error') {
@@ -145,7 +145,7 @@ var JaniceUtils = (function() {
     
     this.output = [];
     for (var i = 0; i < this.input.length; i++) {
-      this.output.push([]);
+      this.output.push([""]);
     }
   }
   
@@ -211,7 +211,7 @@ function JANICE_PRICER(items, spec, market, cacheBuster) {
   }
   
   var url = JaniceUtils.API_URL + '/pricer?market=' + encodeURIComponent(market) + '&_=' + encodeURIComponent(cacheBuster);
-  
+
   var data = JaniceUtils.fetchJson(url, { 
     method: 'post',
     contentType: "text/plain",
