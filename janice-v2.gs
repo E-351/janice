@@ -9,11 +9,14 @@ var JaniceUtils = (function() {
   var MARKETS = {
     'jita': 2,
     'r1o-gn': 3,
-    'perimeter': 4,
-    'jitameter': 5,
     'npc': 6,
     'mj-5f9': 114,
-    'amarr': 115
+    'amarr': 115,
+    'rens': 116,
+    'dodixie': 117,
+    'hek': 118,
+    'e8-432': 119,
+    'r-ag7w': 120
   };
   
   function fetch_(url, options, cacheBuster) {
